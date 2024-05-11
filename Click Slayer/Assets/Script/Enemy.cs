@@ -52,13 +52,11 @@ public class Enemy : MonoBehaviour
             CanTakeDamage = false;
             _anim.SetTrigger("Die");
             Invoke(nameof(DestroyEnemy), 1.5f);
-            Debug.Log("Hasarrrr");
                 
         }
         else
         {
             CanTakeDamage = true;
-
         }
     }
 
