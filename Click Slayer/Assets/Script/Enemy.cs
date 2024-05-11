@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     public TextMeshProUGUI _coinsText;
     public float Coins;
 
-    private bool CanTakeDamage;
+    public bool CanTakeDamage;
     private HealthSystem _healthSystem;
     
    
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         _coinsText.text = Coins.ToString();
     }
 
-    private void TakeDamage(float Damage) 
+    public void TakeDamage(float Damage) 
     {
        
         _Health -= Damage;
