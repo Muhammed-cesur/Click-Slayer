@@ -12,8 +12,13 @@ public class Enemy : MonoBehaviour
     public float _Health;
     public float _MaxHealth;
     public float _damage;
+
     public GameObject _enemy;
     public TextMeshProUGUI _enemyText;
+    public ParticleSystem Coinparticle;
+
+    public TextMeshProUGUI _coinsText;
+    public float Coins;
 
     private bool CanTakeDamage;
     private HealthSystem _healthSystem;
@@ -27,7 +32,6 @@ public class Enemy : MonoBehaviour
         _healthSystem.HealthBar›mage.fillAmount=_MaxHealth;
         _anim = GetComponent<Animator>();
         CanTakeDamage = true;
-
     }
     private void Update()
     {
@@ -36,7 +40,7 @@ public class Enemy : MonoBehaviour
             TakeDamage(_damage);
         }
         _enemyText.text = _Health.ToString();
-
+        _coinsText.text = Coins.ToString();
     }
 
     private void TakeDamage(float Damage) 
@@ -52,7 +56,9 @@ public class Enemy : MonoBehaviour
             CanTakeDamage = false;
             _anim.SetTrigger("Die");
             Invoke(nameof(DestroyEnemy), 1.5f);
-                
+            Coinparticle.Play();
+            Coins++;
+
         }
         else
         {
@@ -60,13 +66,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-
     private void DestroyEnemy() 
-    {
+    { 
         Instantiate(_enemy);
         Destroy(gameObject);
-        
-
     }
 
 
