@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     public float _damage;
 
     public GameObject _enemy;
+/*    public GameObject _enemy2;
+    public GameObject _enemy3;*/
     public TextMeshProUGUI _enemyText;
     public ParticleSystem Coinparticle;
 
@@ -77,7 +79,13 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy() 
     { 
+        int RandonEnemy= Random.Range(0, 3);
         Instantiate(_enemy);
+/*        if (RandonEnemy==0) { Instantiate(_enemy); }
+        if (RandonEnemy == 1) { Instantiate(_enemy2); }
+        if (RandonEnemy == 2) { Instantiate(_enemy3); }*/
+
+
         Destroy(gameObject);
     }
 

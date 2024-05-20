@@ -731,6 +731,8 @@ MonoBehaviour:
   _MaxHealth: 10
   _damage: 1
   _enemy: {fileID: 2281790675136744088}
+  _enemy2: {fileID: 0}
+  _enemy3: {fileID: 0}
   _enemyText: {fileID: 106714047001203663}
   Coinparticle: {fileID: 7075670232357233333}
   _coinsText: {fileID: 7115405590671409830}
