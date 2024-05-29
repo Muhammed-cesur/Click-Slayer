@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     public bool DeadCoins;
     public bool CanTakeDamage;
+
     private HealthSystem _healthSystem;
     
    
@@ -63,12 +64,7 @@ public class Enemy : MonoBehaviour
             Invoke(nameof(DestroyEnemy), 1.5f);
             Coinparticle.Play();
             DeadCoins = true;
-            if (DeadCoins==true) 
-            {
-                Coins++;
-            }
-            
-
+            Coins++;
         }
         else
         {
@@ -81,10 +77,9 @@ public class Enemy : MonoBehaviour
     { 
         int RandonEnemy= Random.Range(0, 3);
         Instantiate(_enemy);
-/*        if (RandonEnemy==0) { Instantiate(_enemy); }
+/*       if (RandonEnemy==0) { Instantiate(_enemy); }
         if (RandonEnemy == 1) { Instantiate(_enemy2); }
         if (RandonEnemy == 2) { Instantiate(_enemy3); }*/
-
 
         Destroy(gameObject);
     }
