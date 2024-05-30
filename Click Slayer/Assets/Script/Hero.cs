@@ -35,13 +35,6 @@ public class Hero : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        //HeroAttack();
-
-    }
 
     public void HeroAttack()
     {
