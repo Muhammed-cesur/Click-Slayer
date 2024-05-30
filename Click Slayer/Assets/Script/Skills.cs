@@ -92,7 +92,7 @@ void Update()
     {
         CoinAndLevelCheck();
         CriticDamage();
-        Cartcurt();
+       
         HeroAttack();
     }
     
@@ -177,19 +177,9 @@ void Update()
         CoinIncreaseCoin ++;
         CoinIncrease ++;
         CoinIncreaseLevel++;
-
     }
-    private void Cartcurt()
-    {
-        if (_enemy.DeadCoins==true)
-        {
-
-            CoinIncrease = _enemy.Coins;
 
 
-            Debug.Log("Altýn : " + CoinIncrease);
-        }
-    }
 
     #endregion
 

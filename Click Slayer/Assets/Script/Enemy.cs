@@ -27,12 +27,14 @@ public class Enemy : MonoBehaviour
     public bool CanTakeDamage;
 
     private HealthSystem _healthSystem;
+    Skills _skill;
     
    
     private Animator _anim;
     void Start()
     {
         _healthSystem = GetComponent<HealthSystem>();
+        _skill = GetComponent<Skills>();
         _Health = _MaxHealth;
         _healthSystem.HealthBar›mage.fillAmount=_MaxHealth;
         _anim = GetComponent<Animator>();
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
+      
         if (Input.GetMouseButtonDown(0) & CanTakeDamage)
         {
             TakeDamage(_damage);
@@ -65,6 +68,11 @@ public class Enemy : MonoBehaviour
             Coinparticle.Play();
             DeadCoins = true;
             Coins++;
+            if (DeadCoins == true && _skill.CoinIncreaseLevel >= 1)
+            {
+                Coins += _skill.CoinIncrease;
+            }
+
         }
         else
         {
@@ -74,7 +82,10 @@ public class Enemy : MonoBehaviour
     }
 
     private void DestroyEnemy() 
-    { 
+    {
+
+
+
         int RandonEnemy= Random.Range(0, 3);
         Instantiate(_enemy);
 /*       if (RandonEnemy==0) { Instantiate(_enemy); }
