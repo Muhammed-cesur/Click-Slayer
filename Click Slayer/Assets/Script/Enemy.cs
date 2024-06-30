@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 
 public class Enemy : MonoBehaviour
@@ -12,10 +13,13 @@ public class Enemy : MonoBehaviour
     public float _Health;
     public float _MaxHealth;
     public float _damage;
+    public float _EnemyDie;
+
+
 
     public GameObject _enemy;
-/*    public GameObject _enemy2;
-    public GameObject _enemy3;*/
+    public GameObject _enemy2;
+    public GameObject _enemy3;
     public TextMeshProUGUI _enemyText;
     public ParticleSystem Coinparticle;
 
@@ -43,13 +47,18 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-      
+        Mathf.FloorToInt(_Health);
+        Mathf.FloorToInt(_MaxHealth);
+
         if (Input.GetMouseButtonDown(0) & CanTakeDamage)
         {
             TakeDamage(_damage);
         }
         _enemyText.text = _Health.ToString();
         _coinsText.text = Coins.ToString();
+
+
+
     }
 
     public void TakeDamage(float Damage) 
@@ -67,6 +76,7 @@ public class Enemy : MonoBehaviour
             Invoke(nameof(DestroyEnemy), 1.5f);
             Coinparticle.Play();
             DeadCoins = true;
+            _EnemyDie++;
             Coins++;
             if (DeadCoins == true && _skill.CoinIncreaseLevel >= 1)
             {
@@ -84,13 +94,14 @@ public class Enemy : MonoBehaviour
     private void DestroyEnemy() 
     {
 
-
+        _Health *= 1.25f;
+        _MaxHealth*= 1.25f;
 
         int RandonEnemy= Random.Range(0, 3);
-        Instantiate(_enemy);
-/*       if (RandonEnemy==0) { Instantiate(_enemy); }
-        if (RandonEnemy == 1) { Instantiate(_enemy2); }
-        if (RandonEnemy == 2) { Instantiate(_enemy3); }*/
+       // Instantiate(_enemy, _enemy.transform.position, _enemy.transform.rotation);
+        if (RandonEnemy==0) { Instantiate(_enemy ,transform.position, transform.rotation); }
+        if (RandonEnemy == 1) { Instantiate(_enemy2, transform.position, transform.rotation); }
+        if (RandonEnemy == 2) { Instantiate(_enemy3, transform.position, transform.rotation); }
 
         Destroy(gameObject);
     }
