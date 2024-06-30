@@ -29,7 +29,7 @@ public class Skills : MonoBehaviour
     [Header("Levels")]
     public float ClickDamageLevel;
     public float CriticChanceLevel;
-    public float CriticDamageLevel;
+    private float CriticDamageLevel;
     public float CoinIncreaseLevel;
     public float Hero1Level;
     public float Hero2Level;
@@ -41,7 +41,6 @@ public class Skills : MonoBehaviour
 
     public TextMeshProUGUI _clickDamageLevel;
     public TextMeshProUGUI _criticChanceLevel;
-    public TextMeshProUGUI _criticDamageLevel;
     public TextMeshProUGUI _coinIncreaseLevel;
     public TextMeshProUGUI _hero1Level;
     public TextMeshProUGUI _hero2Level;
@@ -50,14 +49,10 @@ public class Skills : MonoBehaviour
     public TextMeshProUGUI _heroDelayLevel;
 
 
-
-
-
-
     [Header("Buttons")]
     public GameObject ClickButton;
     public GameObject CriticChanceButton;
-    public GameObject CriticDamageIncreaseButton;
+   
     public GameObject CoinIncreaseButton;
     public GameObject Hero1Button;
     public GameObject Hero2Button;
@@ -83,7 +78,7 @@ public class Skills : MonoBehaviour
     void Start()
     {
         _enemy = GetComponent<Enemy>();
-        _hero = GetComponent<Hero>();
+       // _hero = GetComponent<Hero>();
         StartButtonManager();
     }
 
@@ -92,7 +87,6 @@ void Update()
     {
         CoinAndLevelCheck();
         CriticDamage();
-       
         HeroAttack();
     }
     
@@ -134,7 +128,7 @@ void Update()
     }
 
         private void CriticDamageChanceIncrease()
-    {
+        {
         CriticDamageIncreaseCoin ++;
         _enemy.Coins -= CriticDamageIncreaseCoin;
         CriticIncrease += 1.1f;
@@ -153,7 +147,7 @@ void Update()
        
         int RandomCritic = Random.Range(0, CriticChance);
         
-        if (Input.GetMouseButtonDown(0) &RandomCritic == CriticChance - 1) 
+        if (Input.GetMouseButtonDown(0) & RandomCritic == CriticChance - 1) 
         {
             Invoke(nameof(Delay), 1f);
             _enemy._damage = CriticIncrease;  
@@ -232,14 +226,14 @@ void Update()
         _enemy.Coins-= Hero1damageCoin;
         Hero1damageCoin ++;
         Hero1damageLevel ++;
-        Hero1damage += 25;
+        Hero1damage += 10;
     }
     public void Hero2Damage()
     {
         _enemy.Coins -= Hero2damageCoin;
         Hero2damageCoin++;
         Hero2damageLevel++;
-        Hero2damage += 25;
+        Hero2damage += 10;
     }
     #endregion
 
@@ -275,14 +269,6 @@ void Update()
             CriticChanceButton.SetActive(false);
         }
 
-        if (_enemy.Coins >= CriticDamageIncreaseCoin)
-        {
-            CriticDamageIncreaseButton.SetActive(true);
-        }
-        else
-        {
-            CriticDamageIncreaseButton.SetActive(false);
-        }
 
         if (_enemy.Coins>=CoinIncreaseCoin)
         {
@@ -342,10 +328,6 @@ void Update()
         {
             ClickButton.SetActive(false);
         }
-        if (CriticDamageLevel==50)
-        {
-            CriticDamageIncreaseButton.SetActive(false);
-        }
         if (CriticChanceLevel==50)
         {
             CriticChanceButton.SetActive(false);
@@ -379,7 +361,6 @@ void Update()
     {
         _clickDamageLevel.text = ClickDamageLevel.ToString();
         _criticChanceLevel.text = CriticChanceLevel.ToString();
-        _criticDamageLevel.text = CriticDamageLevel.ToString();
         _coinIncreaseLevel.text = CoinIncreaseLevel.ToString();
         _hero1Level.text = Hero1Level.ToString();
         _hero2Level.text = Hero2Level.ToString();
@@ -391,7 +372,6 @@ void Update()
     {
         ClickButton.SetActive(false);
         CriticChanceButton.SetActive(false);
-        CriticDamageIncreaseButton.SetActive(false);
         CoinIncreaseButton.SetActive(false);
         Hero1Button.SetActive(false);
         Hero2Button.SetActive(false);
